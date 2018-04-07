@@ -1,8 +1,12 @@
+// This code will create a server - currently on my computer
+// 
+
 // Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var handlebars = require ("express-handlebars");
+var exphbs = require ("express-handlebars");
+		// var routes = require ("./routes");
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
@@ -19,19 +23,24 @@ var PORT = 3000;
 var app = express();
 			//var routes = require("./routes");
 
+			// Main route (simple Hello World Message)
+app.get("/", function(req, res) {
+  res.send("Hello world");
+});
+
 // Configure middleware
 
 // Use morgan logger for logging requests
 // app.use(logger("dev"));
 // Use body-parser for handling form submissions
-		// app.use(bodyParser.urlencoded({ extended: true }));
-		// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-		// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-		// app.set("view engine", "handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // Use express.static to serve the public folder as a static directory
-		// app.use(express.static("public"));
+app.use(express.static("public"));
 
 		// app.use(routes);
 
